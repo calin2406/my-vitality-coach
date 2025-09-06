@@ -1,0 +1,22 @@
+{
+  "name": "my-vitality-coach",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next build",
+    "cap-init": "cap init My\\ Vitality\\ Coach com.myvitalitycoach.app",
+    "cap-add-android": "cap add android",
+    "cap-add-ios": "cap add ios",
+    "cap-copy": "cap copy",
+    "cap-sync": "cap sync",
+    "cap-open-android": "cap open android",
+    "cap-open-ios": "cap open ios",
+    "build-mobile": "npm run export && npm run cap-sync",
+    "build-android": "npm run export && npm run cap-sync && npm run cap-open-android",
+    "build-ios": "npm run export && npm run cap-sync && npm run cap-open-ios"
+  }
+}
