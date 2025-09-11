@@ -13,7 +13,7 @@ export default function Home() {
       }}
     >
       <h1 style={{ fontSize: "2.2rem", color: "#333" }}>
-        🚀 My Vitality Coach está no ar!
+        🚀 My Vitality Coach está online!
       </h1>
 
       <a
