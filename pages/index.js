@@ -9,14 +9,32 @@ export default function Home() {
         flexDirection: "column",
         fontFamily: "Arial, sans-serif",
         backgroundColor: "#f4f6f8",
+        gap: "12px",
       }}
     >
-      <h1 style={{ fontSize: "2.5rem", color: "#333" }}>
+      <h1 style={{ fontSize: "2.2rem", color: "#333" }}>
         🚀 My Vitality Coach está no ar!
       </h1>
-      <p style={{ fontSize: "1.2rem", marginTop: "1rem", color: "#555" }}>
-        Se estás a ver isto, o deploy na Vercel funcionou corretamente. 🎉
-      </p>
+
+      <a
+        href="/api/auth/signin"
+        style={{
+          padding: "10px 14px",
+          background: "#111827",
+          color: "#fff",
+          borderRadius: 8,
+          textDecoration: "none",
+        }}
+      >
+        Entrar com Google
+      </a>
+
+      <a
+        href="/api/auth/signout"
+        style={{ fontSize: "0.95rem", color: "#555" }}
+      >
+        Sair
+      </a>
     </div>
   );
 }
