@@ -8,8 +8,9 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  // (opcional) páginas personalizadas no futuro
-  // pages: { signIn: "/login" },
 };
+
+// Para debug: ver se o Client ID está a ser carregado
+console.log("NEXTAUTH USING GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
 
 export default NextAuth(authOptions);
