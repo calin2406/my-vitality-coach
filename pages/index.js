@@ -1,64 +1,68 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-export default function Home() {
-  const { data: session } = useSession();
+export default function HomePage() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/auth/session", { credentials: "include" })
+      .then((r) => r.json())
+      .then((d) => setUser(d?.user || null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div style={wrap}>
+        <h1 style={title}>🚀 My Vitality Coach</h1>
+        <p>A carregar…</p>
+      </div>
+    );
+  }
+
+  if (user) {
+    return (
+      <div style={wrap}>
+        <h1 style={title}>🚀 My Vitality Coach</h1>
+        <img src={user.image} alt="" width="80" height="80" style={{borderRadius:"50%"}} />
+        <h2>Olá, {user.name}</h2>
+        <p>{user.email}</p>
+        <a href="/api/auth/signout" style={dangerBtn}>Sair</a>
+      </div>
+    );
+  }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        flexDirection: "column",
-        fontFamily: "Arial, sans-serif",
-        backgroundColor: "#f4f6f8",
-        gap: "20px",
-      }}
-    >
-      <h1 style={{ fontSize: "2rem", color: "#333" }}>🚀 My Vitality Coach</h1>
-
-      {!session ? (
-        <>
-          <p>Por favor, entra com a tua conta Google:</p>
-          <button
-            onClick={() => signIn("google")}
-            style={{
-              padding: "10px 20px",
-              background: "#111827",
-              color: "#fff",
-              borderRadius: 8,
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            Entrar com Google
-          </button>
-        </>
-      ) : (
-        <>
-          <img
-            src={session.user.image}
-            alt="User Avatar"
-            style={{ borderRadius: "50%", width: "80px", height: "80px" }}
-          />
-          <h2>Olá, {session.user.name} 👋</h2>
-          <p>{session.user.email}</p>
-          <button
-            onClick={() => signOut()}
-            style={{
-              padding: "10px 20px",
-              background: "#e11d48",
-              color: "#fff",
-              borderRadius: 8,
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            Sair
-          </button>
-        </>
-      )}
+    <div style={wrap}>
+      <h1 style={title}>🚀 My Vitality Coach</h1>
+      <a href="/api/auth/signin?callbackUrl=/" style={primaryBtn}>Entrar com Google</a>
     </div>
   );
 }
+
+const wrap = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+  flexDirection: "column",
+  fontFamily: "Arial, sans-serif",
+  backgroundColor: "#f4f6f8",
+  gap: "16px",
+};
+
+const title = { fontSize: "2rem", color: "#333" };
+const primaryBtn = {
+  padding: "10px 20px",
+  background: "#111827",
+  color: "#fff",
+  borderRadius: 8,
+  textDecoration: "none",
+};
+const dangerBtn = {
+  padding: "10px 20px",
+  background: "#e11d48",
+  color: "#fff",
+  borderRadius: 8,
+  textDecoration: "none",
+};
