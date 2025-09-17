@@ -1,0 +1,16 @@
+name: Manual Deploy to Vercel
+
+on:
+  workflow_dispatch: {}      # permite correr manualmente
+  push:
+    branches: [ main ]       # corre automaticamente em cada commit na branch main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deploy Hook
+        run: |
+          curl -sS -X POST "$VERCEL_DEPLOY_HOOK"
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
