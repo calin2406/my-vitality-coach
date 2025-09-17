@@ -4,7 +4,8 @@
     "dev": "next dev -p 32100",
     "build": "next build",
     "start": "next start -p 32100",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:test": "curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_Oqv1jDM7OcvmDg8r9Xs2dljruOWN/iUeXgO1e5A"
   },
   "dependencies": {
     "next": "13.4.12",
