@@ -1,1 +1,2 @@
-# my-vitality-coach
+# My Vitality Coach 🚀
+Primeiro teste de deploy automático
